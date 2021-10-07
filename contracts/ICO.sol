@@ -10,7 +10,7 @@ import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 contract ICO is ERC20, Ownable {
 
     //创建ERC20代币，并发送给合约创建者
-    constructor() ERC20("XYCOIN", "XY") {
+    constructor() ERC20("XYCOIN", "MUKS") {
       _mint(msg.sender, 1000000*(10**uint256(decimals())));
     }
     
@@ -40,5 +40,9 @@ contract ICO is ERC20, Ownable {
       require(amount <= address(this).balance, "ICO: function withdraw invalid input");
       payable(_msgSender()).transfer(amount);
       return true;
+    }
+
+    function getBalance(address account) public view returns (uint256) {
+      return balanceOf(account)/(10**uint256(decimals()));
     }
 }
